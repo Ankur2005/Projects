@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .left {
+            display: inline;
+            height: 50%;
+            width: 50%;
+            float: left;
+            background-color: rgba(239, 232, 232, 0.774);
+            box-shadow: 5px 5px 10px grey;
+        }
+
+        .left>pre>h1 {
+            color: black;
+        }
+
+        .left>p {
+            color: rgba(10, 4, 4, 0.701);
+        }
+
+        .right {
+            display: inline;
+            height: 50%;
+            width: 50%;
+            float: right;
+        }
+
+        .right>textarea {
+            height: 113px;
+            width: 100%;
+            border: none;
+            outline: none;
+            resize: none;
+        }
+
+        .main {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            /* border: 1px solid red; */
+
+        }
+
+        .child2 {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            /* border:1px solid black    */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="left">
+        <pre><h1>TASK LIST</h1></pre>
+        <p>Add tasks to your list by typing to the right and pressing enter. You may then view pending tasks below.</p>
+        <!--  <div class="main">
+                    <div class="child1">
+                        <p></p>
+                    </div>
+                    <div class="child2">
+                        <div><input type="checkbox"/></div>
+                        <div>&#10006</div>
+                    </div>
+                </div> -->
+    </div>
+    <div class="right">
+        <textarea name="type" placeholder="I need to..." onkeypress="fun()"></textarea>
+    </div>
+    <script>
+
+        const y = document.querySelector('textarea');
+
+        y.style.fontSize = "50px";
+        function fun() {
+            y.style.fontSize = "20px";
+            if (event.code == "Enter") {
+                const x = document.querySelector('textarea');
+                const a = document.createElement('div');
+                a.className = 'main';
+                const b = document.createElement('div');
+                b.className = 'child1';
+                const c = document.createElement('div');
+                c.className = 'child2';
+                const d = document.createElement('div');
+                const e = document.createElement('button');
+                // e.id = 'symbol';
+                const f = document.createElement('p');
+                f.setAttribute('class', 'para');
+                const g = document.createElement('input');
+                g.type = 'checkbox';
+
+                f.innerHTML = x.value;
+                a.append(b, c);
+                b.append(f);
+                c.append(d, e);
+                d.append(g);
+                b.style.overflow = 'hidden'
+                e.innerHTML = '&#10006';
+                document.querySelector('.left').append(a);
+                x.value = '';
+                const m = document.querySelector('button');
+                // const u = f;
+                const z = document.querySelector('#symbol');
+                g.addEventListener('change',function(){
+                    if(this.checked)
+                    {
+                        f.style = "text-decoration:line-through";
+
+                    }
+                    else{
+                        f.style='none';
+                    }
+                })
+                e.addEventListener('click',function(){
+                    b.remove();
+                    c.remove();
+                    // d.remove();
+                })
+                
+            }
+        }
+        /* Problems arising are:
+            1) if the text is very large then the div will start to expand out of its scope. (set overflow:hidden)
+            2) if there are many tasks then when we check the checkbox of first task then strikethrough is
+               applied to all the tasks. (solved)
+            3) have to make cross button functional. (solved)
+         */
+    </script>
+
+</body>
+
+</html>
